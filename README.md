@@ -1,0 +1,1 @@
+Seed data can be added via CMR_API\Entities\SeedAndSchemaScript.sql, requires you to have a database called ENSEK_Energy and whatever relevant connection string for the appsettings.json file - in my case I've used a high level access SQL login called test/test
