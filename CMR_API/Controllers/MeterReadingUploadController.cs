@@ -61,7 +61,7 @@ namespace YourProject.Controllers
                     return BadRequest("Invalid account ID");
                 }
 
-                var existingEntry = _dbContext.meterReadings
+                var existingEntry = _dbContext.MeterReadings
                     .FirstOrDefault(mr => mr.AccountId == acId && mr.MeterReadingDateTime == dateTime);
                 if (existingEntry != null)
                 {
@@ -75,7 +75,7 @@ namespace YourProject.Controllers
                     MeterReadValue = value
                 };
 
-                _dbContext.meterReadings.Add(meterReading);
+                _dbContext.MeterReadings.Add(meterReading);
                 await _dbContext.SaveChangesAsync();
 
                 return Ok("Meter reading created successfully");
