@@ -22,7 +22,7 @@ namespace CMR_API.Tests
         public void Setup()
         {
 
-            //Used in memory DB here as had some issues using other test formats, provided the ability not to mock up the DB and simply create an in memory one to test th
+            //Used in memory DB here as had some issues using other test formats, provided the ability not to mock up the DB and simply create an in memory one to test against
 
             var options = new DbContextOptionsBuilder<ENSEK_DbContext>()
                 .UseInMemoryDatabase(databaseName: "ENSEK_TestDatabase")
