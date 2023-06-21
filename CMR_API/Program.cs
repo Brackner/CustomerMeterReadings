@@ -10,8 +10,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//adding dbcontext here 
 builder.Services.AddDbContext<ENSEK_DbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//adding service here for business logic 
+builder.Services.AddScoped<MeterReadingService>();
 
 var app = builder.Build();
 
