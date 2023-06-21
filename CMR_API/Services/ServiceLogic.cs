@@ -40,6 +40,7 @@ public class MeterReadingService
             {
                 // Validation: data types for reader 
                 var accountIdValid = csv.TryGetField<int>(0, out var accountId);
+                // This had some issues reading the CSV dates (formatting, probably needs refactoring to account.. could play with data types maybe?)
                 var meterReadingDateTimeValid = csv.TryGetField<DateTime>(1, out var meterReadingDateTime);
                 var meterReadValueValid = csv.TryGetField<int>(2, out var meterReadValue);
 
