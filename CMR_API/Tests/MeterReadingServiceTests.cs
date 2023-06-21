@@ -70,7 +70,7 @@ namespace CMR_API.Tests
         }
 
         [Test]
-        public async Task IsDuplicateEntry_DuplicateEntryExists_ReturnsTrue()
+        public void IsDuplicateEntry_DuplicateEntryExists_ReturnsTrue()
         {
             var meterReading = new MeterReading
             {
@@ -80,12 +80,12 @@ namespace CMR_API.Tests
             };
             _dbContext.MeterReadings.Add(meterReading);
             _dbContext.SaveChanges();
-            var result = await _meterReadingService.IsDuplicateEntry(meterReading);
+            var result = _meterReadingService.IsDuplicateEntry(meterReading);
             Assert.IsTrue(result);
         }
 
         [Test]
-        public async Task IsDuplicateEntry_NoDuplicateEntryExists_ReturnsFalse()
+        public void IsDuplicateEntry_NoDuplicateEntryExists_ReturnsFalse()
         {
             var meterReading = new MeterReading
             {
@@ -93,7 +93,7 @@ namespace CMR_API.Tests
                 MeterReadingDateTime = DateTime.Now,
                 MeterReadValue = 100
             };
-            var result = await _meterReadingService.IsDuplicateEntry(meterReading);
+            var result = _meterReadingService.IsDuplicateEntry(meterReading);
             Assert.IsFalse(result);
         }
 
