@@ -9,6 +9,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using YourProject.Controllers;
+using Microsoft.EntityFrameworkCore;
 
 public class MeterReadingService
 {
@@ -88,7 +89,12 @@ public class MeterReadingService
             return false;
         }
 
-        if (IsDuplicateEntry(meterReading))
+        if (!await IsDuplicateEntry(meterReading))
+        {
+            return false;
+        }
+
+        if (!await IsValidMeterReadValueAsync(meterReading.MeterReadValue))
         {
             return false;
         }
@@ -102,10 +108,17 @@ public class MeterReadingService
         return account != null;
     }
 
-    public bool IsDuplicateEntry(MeterReading meterReading)
+    public async Task<bool> IsDuplicateEntry(MeterReading meterReading)
     {
-        return _dbContext.MeterReadings.Any(mr =>
+        //didnt include value here as didnt consider it duplicate (values can be different assuming)
+        return await _dbContext.MeterReadings.AnyAsync(mr =>
             mr.AccountId == meterReading.AccountId &&
             mr.MeterReadingDateTime == meterReading.MeterReadingDateTime);
+    }
+
+    public async Task<bool> IsValidMeterReadValueAsync(int meterReadValue)
+    {
+        //additional validation for the meter reading values 
+        return await Task.FromResult(meterReadValue >= 0 && meterReadValue <= 99999);
     }
 }
